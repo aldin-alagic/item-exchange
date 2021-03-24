@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ItemExchange.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210324011138_addItemsToDatabase")]
+    [Migration("20210324140126_addItemsToDatabase")]
     partial class addItemsToDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,7 @@ namespace ItemExchange.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Borrower")
+                    b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
