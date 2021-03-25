@@ -40,5 +40,19 @@ namespace ItemExchange.Controllers
             }
             return View(expense);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int? id)
+        {
+            var expense = _db.Expenses.Find(id);
+            if (expense is null)
+            {
+                return NotFound();
+            }
+            _db.Expenses.Remove(expense);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
