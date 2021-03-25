@@ -54,5 +54,27 @@ namespace ItemExchange.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public IActionResult Update(int? id)
+        {
+            if (id is null || id == 0) return NotFound();
+            var expense = _db.Expenses.Find(id);
+            if (expense is null) return NotFound();
+           
+            return View(expense);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Expense expense)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Expenses.Update(expense);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(expense);
+        }
     }
 }
