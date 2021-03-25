@@ -1,0 +1,42 @@
+﻿
+@model ItemExchange.Models.Expense
+
+@{
+    ViewData["Title"] = "Update expense";
+}
+
+<form class="d-flex justify-content-center mt-5" method="post">
+    <div class="card col-6 px-5 py-4">
+        <div>
+            <h2 class="text-black-50">Update expense</h2>
+            <hr class="w-100"/>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <input asp-for="Id" hidden />
+                <div class="form-group">
+                    <div>
+                        <label class="form-label" asp-for="Type"></label>
+                        <input asp-for="Type" class="form-control" />
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <label class="form-label" asp-for="Amount"></label>
+                        <input asp-for="Amount" class="form-control" />
+                        <span asp-validation-for="Amount" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <input type="submit" class="btn btn-primary mx-3" value="Update" />
+                    <a asp-action="Index" class="btn btn-danger">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{ <partial name="_ValidationScriptsPartial" /> }
+}
