@@ -35,7 +35,7 @@ namespace ItemExchange.Controllers
                 {
                     Text = t.Name,
                     Value = t.Id.ToString(),
-                })
+                }).ToList()
             };
             return View(expenseViewModel);
         }

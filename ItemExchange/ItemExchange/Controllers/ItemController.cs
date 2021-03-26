@@ -19,7 +19,7 @@ namespace ItemExchange.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Item> items = _db.Items;
+            IEnumerable<Item> items = _db.Items.ToList();
             return View(items);
         }
 

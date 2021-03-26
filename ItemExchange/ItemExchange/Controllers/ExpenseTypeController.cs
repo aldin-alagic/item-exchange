@@ -19,7 +19,7 @@ namespace ItemExchange.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<ExpenseType> expenseTypes = _db.ExpenseTypes;
+            IEnumerable<ExpenseType> expenseTypes = _db.ExpenseTypes.ToList();
             return View(expenseTypes);
         }
 
