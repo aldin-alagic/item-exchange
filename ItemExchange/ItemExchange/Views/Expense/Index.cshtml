@@ -20,19 +20,21 @@
     {
         <table class="table table-bordered table-striped">
             <thead>
-                <tr class="d-flex">
-                    <th class="col-6">Expense type</th>
-                    <th class="col-3">Amount</th>
-                    <th class="col-3"></th>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var expense in Model)
                 {
-                    <tr class="d-flex" data-rowId="@expense.Id">
-                        <td class="col-6">@expense.Type</td>
-                        <td class="col-3">@expense.Amount</td>
-                        <td class="col-3 text-center">
+                    <tr data-rowId="@expense.Id">
+                        <td>@expense.Name</td>
+                        <td>@expense.Type.Name</td>
+                        <td>@expense.Amount</td>
+                        <td class="text-center">
                             <a class="text-primary mr-2" asp-action="Update" asp-route-Id="@expense.Id">
                                 <i class="fas fa-pen fa-lg"></i>
                             </a>
@@ -66,7 +68,6 @@
                 </div>
             </div>
         </div>
-
     }
     else
     {
