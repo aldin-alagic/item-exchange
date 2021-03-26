@@ -1,6 +1,9 @@
 ﻿using ItemExchange.Data;
 using ItemExchange.Models;
+using ItemExchange.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,26 +22,35 @@ namespace ItemExchange.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Expense> expenses = _db.Expenses;
+            IEnumerable<Expense> expenses = _db.Expenses.Include("Type").ToList();
             return View(expenses);
         }
 
         public IActionResult Create()
         {
-            return View();
+            ExpenseViewModel expenseViewModel = new ExpenseViewModel()
+            {
+                Expense = new Expense(),
+                ExpenseTypes = _db.ExpenseTypes.Select(t => new SelectListItem
+                {
+                    Text = t.Name,
+                    Value = t.Id.ToString(),
+                })
+            };
+            return View(expenseViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Expense expense)
+        public IActionResult Create(ExpenseViewModel expenseViewModel)
         {
             if (ModelState.IsValid)
             {
-                _db.Expenses.Add(expense);
+                _db.Expenses.Add(expenseViewModel.Expense);
                 _db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(expense);
+            return View(expenseViewModel.Expense);
         }
 
         [HttpPost]
